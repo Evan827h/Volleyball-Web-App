@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs')%>
+<div class="body">
+    <div class="newConnectionForm">
+        <form action="/connections" method = 'POST'>
+            <label for="topic">Event Type</label>
+            <select id="topic" name="topic">
+                <option value="Pick-up">Pick-up Game</option>
+                <option value="Tournament">Tournament</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="name">Event Name</label>
+            <input type="text" id="name" name="name" placeholder="Your event.." required maxlength="24">
+
+            <label for="location">Where</label>
+            <input type="text" id="location" name="location" placeholder="Location" required>
+
+            <label for="date">When</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="rec">Recourring</label>
+            <input type="checkbox" id="rec" name="rec" value="rec">
+        
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime" name="startTime" required> 
+
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime" name="endTime" required>
+
+            <label for="details" id="detailsLabel">Details</label>
+            <input type="text" id="details" name="details" placeholder="Description" required minlength="10">
+
+            <label for="img">Image URL</label>
+            <input type="text" id="img" name="img" placeholder="Image URL" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+<%- include('../partials/footer.ejs')%>
+    

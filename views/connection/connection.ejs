@@ -1,0 +1,82 @@
+<%- include('../partials/header.ejs')%>
+<div class="wrapper">
+    <h2 class="connection-header"><%=connection.name%></h2>
+    <div class="wrapper-grid">
+        <div class="col">
+            <div class="row">
+                <img class="event-img" src="<%=connection.img%>" alt="Photo of Event">
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <h3>Hosted By <%=connection.host.firstName%></h3>
+                
+            </div>
+            <div class="row">
+                <%var time = new Date("April 04, 2001 " + connection.startTime + ":00");
+                var startTime = time.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true
+                });
+                time = new Date("February 04, 2001 " + connection.endTime + ":00");
+                var endTime = time.toLocaleTimeString("en-US", {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true
+                });
+                %>
+                <p><%=connection.date.toString().substr(0, 15)%>, <%=startTime%> - <%=endTime%></p>
+
+                <% if(connection.rec === 'rec') { %>
+                    <h3>(Recourring)</h3>
+                <% } %>
+            </div>
+            <div class="row">
+                <p><%=connection.location%></p>
+            </div>
+        </div>
+        <div class="col">
+            <%
+                var count = Object.values(rsvp).length;
+            %>
+            <div class="row">
+                <h3><%= count %> member(s) RSVP'd</h3>
+            </div>
+            <%if(user == connection.host._id) {%>
+                <div class="row">
+                    <form>
+                        <button type="submit" formmethod="GET" formaction="/connections/<%= connection.id%>/edit">Edit</button>
+                        <button type="submit" formmethod="POST" formaction="/connections/<%= connection.id%>/?_method=DELETE">Delete</button>
+                    </form>
+                </div>
+            <%} else {%>
+                <% if(Object.values(rsvp).find((item) => item.user == user)) {%>
+                    <%
+                        var status = Object.values(rsvp).find((item) => item.user == user).status;
+                    %>
+                    <div class="row">
+                        <h3>You said <%= status %> to the RSVP.</h3>
+                    </div>
+                <%} else { %>
+                <div class="row">
+                    <h3>RSVP to attend</h3>
+                </div>
+                <%}%>
+                <div class="row">
+                    <form class="form" action="/connections/<%=connection.id%>/rsvp" method = 'POST'>
+                        <button class="yes" name="status" type="submit" value="yes">Yes</button>
+                        <button class="no" name="status" type="submit" value="no">No</button>
+                        <button class="maybe" name="status" type="submit" value="maybe">Maybe</button>
+                    </form>
+                </div>
+            <%}%>
+        </div>
+    </div> 
+    <div class="details-section">
+        <h3>Details</h3>
+        <p><%=connection.details%></p>
+    </div>
+</div>
+<%- include('../partials/footer.ejs')%>
+    

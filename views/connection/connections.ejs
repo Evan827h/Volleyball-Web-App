@@ -1,0 +1,29 @@
+<%- include('../partials/header.ejs')%>
+<div class="body">
+    <h2 class="connections-header">Find a match</h2>
+    <% if(connections.length) {%>
+        <%topics.forEach(topic => {%>
+            <div class="category">
+                <h3 class="topic">
+                    <%= topic %>
+                </h3>
+                <ul class="connections">
+                    <% var empty = true;
+                    connections.forEach(connection => {%>
+                        <% if(connection.topic == topic) { %>
+                            <li><a href="/connections/<%= connection.id%>"><%= connection.name %></a></li>
+                            <%empty = false;%>
+                        <%}%>
+                    <%});
+                    if(empty) {%>
+                        <li><a>No upcoming events</a></li>
+                    <%}%>
+                </ul>
+            </div>
+        <% });
+    } else {%>
+        <p>No connections currently. Create your Event today.</p>
+    <%}%>
+</div>
+<%- include('../partials/footer.ejs')%>
+    

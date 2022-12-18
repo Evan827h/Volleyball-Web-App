@@ -1,0 +1,39 @@
+<%- include('../partials/header.ejs')%>
+<div class="body">
+    <div class="newConnectionForm">
+        <form method = "POST" action = "/connections/<%=connection.id%>?_method=PUT">
+
+            <label for="name">Event Name</label>
+            <input type="text" id="name" name="name" value="<%= connection.name %>" required maxlength="24">
+
+            <label for="location">Where</label>
+            <input type="text" id="location" name="location" value="<%= connection.name %>" required>
+
+            <% //convert date
+            const offset = connection.date.getTimezoneOffset();
+            connection.date = new Date(connection.date.getTime() - (offset*60*1000));
+            var date =  connection.date.toISOString().split('T')[0] %>
+            <label for="date">When</label>
+            <input type="date" id="date" name="date" value="<%= date %>" required>
+
+            <label for="rec">Recourring</label>
+            <input type="checkbox" id="rec" name="rec" value="rec">
+        
+            <label for="startTime">Start Time</label>
+            <input type="time" id="startTime" name="startTime" value="<%= connection.startTime %>" required>
+
+            <label for="endTime">End Time</label>
+            <input type="time" id="endTime" name="endTime" value="<%= connection.endTime %>" required>
+
+            <label for="details" id="detailsLabel">Details</label>
+            <input type="text" id="details" name="details" value="<%= connection.details %>" required minlength="10">
+
+            <label for="img">Image URL</label>
+            <input type="text" id="img" name="img" value="<%= connection.img %>" required>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
+<%- include('../partials/footer.ejs')%>
+    

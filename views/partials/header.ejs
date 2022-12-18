@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Univeristy City Volleyball</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="" type="image/x-icon">
+  </head>
+  <body>
+    <main>
+        <div class="container">
+            <div class="content-wrap">
+                <header class="site-header">
+                    <a href="/" class="logo"> Univeristy City Volleyball</a>
+                    <div class="user-nav">
+                        <%if(!user) {%>
+                          <a href='/users/new'>Sign Up</a>
+                          <a href='/users/login'>Login</a>
+                        <%} else {%>
+                          <a href="/connections/new">Start a connection</a>
+                          <a href='/users/profile'>Profile</a>
+                          <a href='/users/logout'>Logout</a>
+                        <%}%>
+                    </div>
+                </header> 
+                <div class="navigation">
+                        <a href="/connections">Connections</a>
+                </div>
+                <% if(errorMessages.length > 0) {%>
+                  <% errorMessages.forEach(message=>{%>
+                      <div class='error'>
+                          <%=message%>
+                      </div>
+                      <%});%>
+                          <%}%>
+                              <% if(successMessages.length > 0) {%>
+                                  <% successMessages.forEach(message=>{%>
+                                      <div class='success'>
+                                          <%=message%>
+                                      </div>
+                                      <%});%>
+                                          <%}%>
